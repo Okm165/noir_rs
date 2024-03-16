@@ -39,8 +39,13 @@ jobs:
         with:
             submodules: 'true'
       
-      - name: Install build tools
-        run: sudo apt-get update -y && sudo apt-get install build-essential -y
+      - name: Install | Clang
+        run: apt update && apt upgrade -y && apt install -y libclang-dev
+
+      - name: Install | CMake
+        uses: jwlawson/actions-setup-cmake@v1.13
+        with:
+          cmake-version: '3.24.0'
 
       - name: Install stable toolchain
         uses: actions-rs/toolchain@v1
