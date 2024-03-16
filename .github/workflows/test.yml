@@ -40,7 +40,7 @@ jobs:
             submodules: 'true'
       
       - name: Install | Clang
-        run: apt update && apt upgrade -y && apt install -y libclang-dev
+        run: sudo apt update && sudo apt upgrade -y && sudo apt install -y libclang-dev
 
       - name: Install | CMake
         uses: jwlawson/actions-setup-cmake@v1.13
