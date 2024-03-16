@@ -11,3 +11,4 @@ authors = ["Bartosz Nowak"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [workspace.dependencies]
+thiserror = "1.0.58"

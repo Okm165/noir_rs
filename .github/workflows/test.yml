@@ -6,11 +6,11 @@
 
 on: [push, pull_request]
 
-name: Quickstart
+name: noir_rs
 
 jobs:
   fmt:
-    name: Check
+    name: Fmt check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
@@ -24,7 +24,7 @@ jobs:
           profile: minimal
           toolchain: stable
 
-      - name: Run cargo check
+      - name: Run cargo fmt check
         uses: actions-rs/cargo@v1
         with:
           command: fmt
