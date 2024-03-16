@@ -39,10 +39,8 @@ jobs:
         with:
             submodules: 'true'
       
-      - name: Install compiler
-        uses: rlalik/setup-cpp-compiler@master
-        with:
-          compiler: latest
+      - name: Install build tools
+        run:  apt-get update -y && apt-get install build-essential -y
 
       - name: Install stable toolchain
         uses: actions-rs/toolchain@v1
