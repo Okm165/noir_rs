@@ -12,27 +12,24 @@ jobs:
   fmt:
     name: Fmt check
     runs-on: ubuntu-latest
+    container:
+      image: docker.io/rust:latest
+    
     steps:
       - name: Checkout sources
         uses: actions/checkout@v2
         with:
             submodules: 'true'
 
-      - name: Install stable toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-
-      - name: Run cargo fmt check
-        uses: actions-rs/cargo@v1
-        with:
-          command: fmt
-          args: --check
+      - name: Test
+        run: cargo fmt --check
 
   test:
-    name: Test
+    name: Build&Test
     runs-on: ubuntu-latest
+    container:
+      image: docker.io/rust:latest
+    
     steps:
       - name: Checkout sources
         uses: actions/checkout@v2
@@ -40,20 +37,15 @@ jobs:
             submodules: 'true'
       
       - name: Install | Clang
-        run: sudo apt update && sudo apt upgrade -y && sudo apt install -y libclang-dev
+        run: apt update && apt install -y libclang-dev
 
       - name: Install | CMake
         uses: jwlawson/actions-setup-cmake@v1.13
         with:
           cmake-version: '3.24.0'
 
-      - name: Install stable toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-
-      - name: Run cargo test
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
+      - name: Build
+        run: cargo build -vv
+        
+      - name: Test
+        run: cargo test -vv
