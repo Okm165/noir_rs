@@ -28,7 +28,7 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: fmt
-          args: check
+          args: --check
 
   test:
     name: Test
@@ -38,6 +38,11 @@ jobs:
         uses: actions/checkout@v2
         with:
             submodules: 'true'
+      
+      - name: Install compiler
+        uses: rlalik/setup-cpp-compiler@master
+        with:
+          compiler: latest
 
       - name: Install stable toolchain
         uses: actions-rs/toolchain@v1
